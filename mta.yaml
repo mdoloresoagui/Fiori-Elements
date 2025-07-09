@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: WLP
+version: 0.0.1
+modules:
+- name: WLP-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: WLP-destination-service
+    parameters:
+      content-target: true
+  - name: WLP_html_repo_host
+    parameters:
+      service-key:
+        name: WLP_html_repo_host-key
+  - name: uaa_WLP
+    parameters:
+      service-key:
+        name: uaa_WLP-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: WorkListPage_WLP_html_repo_host
+          ServiceInstanceName: WLP-html5-app-host-service
+          ServiceKeyName: WLP_html_repo_host-key
+          sap.cloud.service: WorkListPage
+        - Authentication: OAuth2UserTokenExchange
+          Name: WorkListPage_uaa_WLP
+          ServiceInstanceName: WLP-xsuaa-service
+          ServiceKeyName: uaa_WLP-key
+          sap.cloud.service: WorkListPage
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: WLP-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: WLP_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - worklistpageemployee.zip
+      name: worklistpageemployee
+      target-path: resources/
+- name: worklistpageemployee
+  type: html5
+  path: worklist_page_employee
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: WLP-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: WLP-destination-service
+    service-plan: lite
+- name: WLP_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: WLP-html5-app-host-service
+    service-plan: app-host
+- name: uaa_WLP
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: WLP-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
