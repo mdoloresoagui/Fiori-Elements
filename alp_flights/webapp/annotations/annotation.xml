@@ -1,99 +1,117 @@
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
-        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
     </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
-        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
     </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
-        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/sap/Z_FLIGHTS_CDS/$metadata">
-        <edmx:Include Namespace="Z_FLIGHTS_CDS" Alias="SAP"/>
+        <edmx:Include Namespace="Z_FLIGHTS_CDS" Alias="SAP" />
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
-        <Annotations Target="SAP.Z_FLIGHTSType">
-            <!--HeaderInfo-->
-            <Annotation Term="UI.HeaderInfo" >
-                <Record Type="UI.HeaderInfoType">
-                    <PropertyValue Property="TypeName" String="{@i18n>flight}"/>
-                    <PropertyValue Property="TypeNamePlural" String="{@i18n>flights}"/>
-                </Record>
-            </Annotation> 
-            <!--LineItem-->        
-            <Annotation Term="UI.LineItem" Qualifier="Table">
-                <Collection>
-                    <Record Type="UI.DataField">
-                        <PropertyValue Property="Value" Path="Airline"/>
-                        <PropertyValue Property="Label" String="{@i18n>airline}"/>
+            <Annotations Target="SAP.Z_FLIGHTSType">
+                <!--SelectionFields-->
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Airline</PropertyPath>
+                        <PropertyPath>TravelAgency</PropertyPath>
+                        <PropertyPath>Customer</PropertyPath>
+                        <PropertyPath>BookNumber</PropertyPath>
+                        <PropertyPath>FlightDate</PropertyPath>
+                        <PropertyPath>BookingPrice</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <!--HeaderInfo-->
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="{@i18n>flight}" />
+                        <PropertyValue Property="TypeNamePlural" String="{@i18n>flights}" />
                     </Record>
-                    <Record Type="UI.DataField">
-                        <PropertyValue Property="Value" Path="TravelAgency"/>
-                        <PropertyValue Property="Label" String="{@i18n>travelAgency}"/>
+                </Annotation>
+                <!--LineItem-->
+                <Annotation Term="UI.LineItem" Qualifier="Table">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Airline" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TravelAgency" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Customer" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BookNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="FlightDate" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BookingPrice" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <!--Chart-->
+                <Annotation Term="UI.Chart" Qualifier="ChartColumn">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="Title" String="{@i18n>flightDatesPriceVs}" />
+                        <PropertyValue Property="Description" String="{@i18n>flightDateVsPrice}" />
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line" />
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>FlightDate</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="DimensionAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartDimensionAttributeType">
+                                    <PropertyValue Property="Dimension" PropertyPath="FlightDate" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>BookingPrice</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="BookingPrice" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
-                    <Record Type="UI.DataField">
-                        <PropertyValue Property="Value" Path="Customer"/>
-                        <PropertyValue Property="Label" String="{@i18n>customer}"/>
+                </Annotation>
+                <!--Variante-->
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Text" String="Default" />
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="Airline" />
+                                    <PropertyValue Property="Descending" Bool="false" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="IncludeGrandTotal" Bool="false"/>
+                        <PropertyValue Property="InitialExpansionLevel" Int="1"/>
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.LineItem#Table</AnnotationPath>
+                                <AnnotationPath>@UI.Chart#ChartColumn</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
-                    <Record Type="UI.DataField">
-                        <PropertyValue Property="Value" Path="BookNumber"/>
-                        <PropertyValue Property="Label" String="{@i18n>bookNumber}"/>
-                    </Record>
-                    <Record Type="UI.DataField">
-                        <PropertyValue Property="Value" Path="FlightDate"/>
-                        <PropertyValue Property="Label" String="{@i18n>flightDate}"/>
-                    </Record>
-                    <Record Type="UI.DataField">
-                        <PropertyValue Property="Value" Path="BookingPrice"/>
-                        <PropertyValue Property="Label" String="{@i18n>bookingPrice}"/>
-                    </Record>
-                </Collection>
-            </Annotation>
-            <!--Chart--> 
-            <Annotation Term="UI.Chart" Qualifier="CHart">
-                <Record Type="UI.ChartDefinitionType">
-                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line"/>
-                    <PropertyValue Property="Dimensions">
-                        <Collection>
-                            <PropertyPath>FlightDate</PropertyPath>
-                        </Collection>
-                    </PropertyValue>
-                    <PropertyValue Property="DimensionAttributes">
-                        <Collection>
-                            <Record Type="UI.ChartDimensionAttributeType">
-                                <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
-                                <PropertyValue Property="Dimension" PropertyPath="FlightDate"/>
-                            </Record>
-                        </Collection>
-                    </PropertyValue>
-                    <PropertyValue Property="Measures">
-                        <Collection>
-                            <PropertyPath>BookingPrice</PropertyPath>
-                        </Collection>
-                    </PropertyValue>
-                    <PropertyValue Property="MeasureAttributes">
-                        <Collection>
-                            <Record Type="UI.ChartMeasureAttributeType">
-                                <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
-                                <PropertyValue Property="Measure" PropertyPath="BookingPrice"/>
-                            </Record>
-                        </Collection>
-                    </PropertyValue>
-                </Record>
-            </Annotation>
-            <!--Variante-->
-            <Annotation Term="UI.PresentationVariant">
-                <Record Type="UI.PresentationVariantType">
-                    <PropertyValue Property="Visualizations">
-                        <Collection>
-                            <AnnotationPath>@UI.LineItem#Table</AnnotationPath>
-                            <AnnotationPath>@UI.Chart#CHart</AnnotationPath>
-                        </Collection>
-                    </PropertyValue>
-                </Record>
-            </Annotation> 
-        </Annotations>
+                </Annotation>
+            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

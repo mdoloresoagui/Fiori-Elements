@@ -91,6 +91,7 @@
           "defaultBindingMode": "TwoWay",
           "defaultCountMode": "Inline",
           "refreshAfterChange": false,
+          "useBatch": false,
           "metadataUrlParams": {
             "sap-value-list": "none"
           }
@@ -129,6 +130,7 @@
             "showGoButtonOnFilterBar": true,
             "tableType": "AnalyticalTable",
             "autoHide": true,
+            "hideVisualFilter": true,
             "smartVariantManagement": false,
             "tableSettings": {
               "multiSelect": false
