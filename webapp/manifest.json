@@ -1,0 +1,173 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "overviewpage",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:ovp",
+      "version": "1.18.2",
+      "toolsId": "35037572-e2c2-41ba-8631-65d18718c718"
+    },
+    "dataSources": {
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/v2/northwind/northwind.svc/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.138.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.f": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ovp": {},
+        "sap.ui.rta": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "overviewpage.i18n.i18n"
+        }
+      },
+      "mainModel": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [],
+      "targets": {}
+    }
+  },
+  "sap.ovp": {
+    "globalFilterModel": "mainModel",
+    "smartVariantRequired": false,
+    "globalFilterEntitySet": "Employees",
+    "containerLayout": "resizable",
+    "enableLiveFilter": true,
+    "considerAnalyticalParameters": false,
+    "cards": {
+      "table": {
+        "model": "mainModel",
+        "template": "sap.ovp.cards.table",
+        "settings": {
+          "title": "Products",
+          "entitySet": "Products",
+          "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Products",
+          "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#ProductsDataPoint"
+        }
+      },
+      "list": {
+        "model": "mainModel",
+        "template": "sap.ovp.cards.list",
+        "settings": {
+          "title": "List Customer",
+          "entitySet": "Customers",
+          "listType": "condensed",
+          "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#ListCustomer"
+        }
+      },
+      "stack": {
+        "model": "mainModel",
+        "template": "sap.ovp.cards.stack",
+        "settings": {
+          "title": "Orders",
+          "subTitle": "Products by Orders",
+          "entitySet": "Orders",
+          "addODataSelect": false,
+          "objectStreamCardsSettings": {
+            "annotationPath": "com.sap.vocabularies.UI.v1.Facets#ContainerOrder"
+          }
+        }
+      },
+      "link": {
+        "model": "mainModel",
+        "template": "sap.ovp.cards.linklist",
+        "settings": {
+          "title": "Employees",
+          "subTitle": "Links",
+          "listFlavor": "standard",
+          "entitySet": "Employees",
+          "sortBy": "EmployeeID",
+          "sortOrder": "descending",
+          "headerAnnotationPath": "com.sap.vocabularies.UI.v1.HeaderInfo#Header",
+          "defaultSpan": {
+            "rows": 20,
+            "cols": 2
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "analytical"
+  }
+}
