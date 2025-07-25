@@ -1,0 +1,72 @@
+[
+    {
+        "ID": 1,
+        "FullName": "Lucía Martínez",
+        "Location": "Madrid, España",
+        "Email": "lucia.martinez@example.com",
+        "PhoneNumber": "+34 600 123 456"
+    },
+    {
+        "ID": 2,
+        "FullName": "Carlos Fernández",
+        "Location": "Barcelona, España",
+        "Email": "carlos.fernandez@example.com",
+        "PhoneNumber": "+34 611 234 567"
+    },
+    {
+        "ID": 3,
+        "FullName": "Ana Gómez",
+        "Location": "Sevilla, España",
+        "Email": "ana.gomez@example.com",
+        "PhoneNumber": "+34 622 345 678"
+    },
+    {
+        "ID": 4,
+        "FullName": "Javier López",
+        "Location": "Valencia, España",
+        "Email": "javier.lopez@example.com",
+        "PhoneNumber": "+34 633 456 789"
+    },
+    {
+        "ID": 5,
+        "FullName": "María Rodríguez",
+        "Location": "Bilbao, España",
+        "Email": "maria.rodriguez@example.com",
+        "PhoneNumber": "+34 644 567 890"
+    },
+    {
+        "ID": 6,
+        "FullName": "Pedro Sánchez",
+        "Location": "Zaragoza, España",
+        "Email": "pedro.sanchez@example.com",
+        "PhoneNumber": "+34 655 678 901"
+    },
+    {
+        "ID": 7,
+        "FullName": "Laura Torres",
+        "Location": "Málaga, España",
+        "Email": "laura.torres@example.com",
+        "PhoneNumber": "+34 666 789 012"
+    },
+    {
+        "ID": 8,
+        "FullName": "David Ruiz",
+        "Location": "Murcia, España",
+        "Email": "david.ruiz@example.com",
+        "PhoneNumber": "+34 677 890 123"
+    },
+    {
+        "ID": 9,
+        "FullName": "Elena Navarro",
+        "Location": "Alicante, España",
+        "Email": "elena.navarro@example.com",
+        "PhoneNumber": "+34 688 901 234"
+    },
+    {
+        "ID": 10,
+        "FullName": "Sergio Romero",
+        "Location": "Valladolid, España",
+        "Email": "sergio.romero@example.com",
+        "PhoneNumber": "+34 699 012 345"
+    }
+]

@@ -11,4 +11,34 @@
             </f:DynamicPageTitle>
         </f:title>
     </f:DynamicPage>
+            <Table id="UsersTable" items="{users>/}">
+        <columns>
+            <Column id="id">
+                <Text id="TextId" text="{i18n>id}"/>
+            </Column>
+            <Column id="fullName">
+                <Text id="TextfullName" text="{i18n>fullname}"/>
+            </Column>
+            <Column id="location">
+                <Text id="TextLocation" text="{i18n>location}"/>
+            </Column>
+            <Column id="email">
+                <Text id="textEmail" text="{i18n>email}"/>
+            </Column>
+            <Column id="phoneNumber">
+                <Text id="TextPhoneNumber" text="{i18n>phoneNumber}"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem id="columnListItem">
+                <cells>
+                    <ObjectIdentifier id="user_id" text="{users>ID}"/>
+                    <Label id="user_fullName" text="{users>FullName}"/>
+                    <Label id="user_location" text="{users>Location}"/>
+                    <Label id="user_email" text="{users>Email}"/>
+                    <Label id="user_phoneNumber" text="{users>PhoneNumber}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
 </mvc:View>
